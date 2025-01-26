@@ -5,7 +5,6 @@ const nodemailer = require("nodemailer");
 const cors = require("cors");
 
 const app = express();
-const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(bodyParser.json());
@@ -22,7 +21,7 @@ app.post("/send-email", async (req, res) => {
   try {
     // Konfigurisanje Nodemailer transportera
     const transporter = nodemailer.createTransport({
-      service: "gmail", // Možeš koristiti druge servise
+      service: "gmail",
       auth: {
         user: process.env.EMAIL, // Email adresa sa koje šalješ
         pass: process.env.PASSWORD, // Lozinka ili App Password
@@ -32,7 +31,7 @@ app.post("/send-email", async (req, res) => {
     // Email sadržaj
     const mailOptions = {
       from: email,
-      to: "delicdevelopment@gmail.com",
+      to: "srdjandelic02@gmail.com",
       subject: `Message from ${name}`,
       text: `Name: ${name}\nEmail: ${email}\nMessage: ${field}`,
     };
@@ -46,7 +45,5 @@ app.post("/send-email", async (req, res) => {
   }
 });
 
-// Pokretanje servera
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
+// Eksportuj aplikaciju kao API funkciju
+module.exports = app;
